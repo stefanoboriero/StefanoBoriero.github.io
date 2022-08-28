@@ -1,7 +1,7 @@
 +++
 title = "About"
 description = "A brief introduction about myself"
-date = "2019-02-28"
+date = "2022-08-28"
 aliases = ["about-me", "contact"]
 author = "Stefano Boriero"
 enableComments = false
@@ -12,6 +12,14 @@ enableComments = false
 Hello, it's a me Stefano!  
 Writing software for money and playing basketball for fun, although my younger self would have preferred the opposite :)  
 Born in Italy and currently living in Barcelona! 
+
+# Career
+
+### [Ocado Technology](https://www.ocadogroup.com/technology/technology-pioneers/) (Aug 2019 - present)
+
+Worked with all the things in the Observability domain :telescope:.  
+Developed in-house monitoring system as well as best practises and guidlinesusing third party tools, like NewRelic, GrafanaCloud, CloudWatch and Pagerduty.  
+Conducted internal trainings, talks and write-ups to spread the observability culture.
 
 # Publications
 
