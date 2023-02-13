@@ -1,10 +1,11 @@
-+++ 
-author = "Stefano Boriero" 
-title = "A day in Kubernetes" 
-date = "2022-12-11" 
-description = "You can consider this is a declaration of intent, but really is just a simple way to get the ball rolling on this project of mine. Like a more verbose Hello, World!" 
-tags = [ "kubernetes", "hackday"] 
-+++
+---
+author: "Stefano Boriero" 
+title: "A day in Kubernetes" 
+date: "2022-12-11" 
+description: "You can consider this is a declaration of intent, but really is just a simple way to get the ball rolling on this project of mine. Like a more verbose Hello, World!" 
+tags: [ "kubernetes", "hackday"] 
+categories: ["learning"]
+---
 
 
 Recentely I was asked if I had any experience in Kubernetes: well, long story short, I don't :)
