@@ -24,6 +24,7 @@ Conducted internal trainings, talks and write-ups to spread the observability cu
 # Publications
 
 * [Deceptive Actions to Improve the Attribution of Rationality to Playing Robotic Agents](https://doi.org/10.1007/s12369-020-00647-8)
+* [Robot player adaptation to human opponents in physical, competitive robogames](http://doi.org/10.1109/RO-MAN47096.2020.9223576)
 
 # Outstanding achievements
 
