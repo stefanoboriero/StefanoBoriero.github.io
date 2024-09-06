@@ -19,7 +19,7 @@ title = "Stefano"
   [[menu.main]]
         identifier = "about"
         name = "About"
-        url = "/about/"
+        url = "/posts/about"
         weight = 2
 
   [[menu.main]]
