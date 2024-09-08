@@ -7,8 +7,7 @@ tags: [ "observability"]
 categories: ["slo"]
 ---
 
-# Service Level Objectives - SLO
-This document explains Service Level Objectives (SLOs), a monitoring practice aimed at ensuring systems provide an acceptable level of service. As with any practice, it won't make systems reliable on its own; developers need to follow it consistently for it to be fruitful. It requires discipline and time to become familiar with it, but it's a rewarding journey that you can add to your CV. If you're passionate about the topic, feel free to read the complete [Google SRE books](https://sre.google/books/); if not, we'll link specific chapters in the following paragraphs that will give you a good grasp of the subject.
+This article explains Service Level Objectives (SLOs), a monitoring practice aimed at ensuring systems provide an acceptable level of service. As with any practice, it won't make systems reliable on its own; developers need to follow it consistently for it to be fruitful. It requires discipline and time to become familiar with it, but it's a rewarding journey that you can add to your CV. If you're passionate about the topic, feel free to read the complete [Google SRE books](https://sre.google/books/); if not, we'll link specific chapters in the following paragraphs that will give you a good grasp of the subject.
 
 ## Key concepts
 The core concepts of this practice are SLI, SLO, and SLA. An excellent introduction to these concepts is the [the "Service Level Objective" chapter from Google SRE book](https://sre.google/sre-book/service-level-objectives/). Below we will provide our own definitions along with practical examples.
