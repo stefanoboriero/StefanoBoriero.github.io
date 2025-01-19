@@ -67,7 +67,7 @@ $$<p>This may sound complex, but hopefully the practical example will make thing
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>                  outcome=&#34;SUCCESS&#34;,
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>                  le=&#34;+Inf&#34;,
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>                  }[1h]
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          ))</span>          
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          ))</span>
 </span></span><span style=display:flex><span>      <span style=color:#75715e># This is an extra aggregation that is going to give faster recall times for our alerts</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>myservice:latency_sli:5m</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
@@ -82,7 +82,7 @@ $$<p>This may sound complex, but hopefully the practical example will make thing
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>                  outcome=&#34;SUCCESS&#34;,
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>                  le=&#34;+Inf&#34;,
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>                  }[5m]
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          ))</span>          
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          ))</span>
 </span></span></code></pre></div><p>The next step is calculating the actual thresholds for the alert. For that, let&rsquo;s use the formula presented in the <a href=#burn-rate>key concept paragraph</a>. Remember to convert times variables to the same unit of time! In our case, 30 days is equivalent to 720 hours.</p>$$
 burn\_rate\_threshold = \frac{slo\_window}{time\_window} \times budget\_consumption\_percentage = \frac{720}{1} \times 2\% = 720 \times \frac{2}{100} = 14.4
 $$<p>With this, we can go ahead and define the alert as the following:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>groups</span>:
@@ -97,7 +97,7 @@ $$<p>With this, we can go ahead and define the alert as the following:</p><div c
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>            (1 - myservice:latency_sli:1h) / (1 - 0.9) &gt; 14.4
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>          and
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>            (1 - myservice:latency_sli:5m) / (1 - 0.9) &gt; 14.4
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          )</span>          
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          )</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>labels</span>:
 </span></span><span style=display:flex><span>          <span style=color:#f92672>severity</span>: <span style=color:#ae81ff>critical</span>
 </span></span><span style=display:flex><span>          <span style=color:#f92672>app_group</span>: <span style=color:#ae81ff>pharos</span>
@@ -117,8 +117,8 @@ $$<p>With this, we can go ahead and define the alert as the following:</p><div c
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>              service_name=&#34;myservice&#34;,
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>              outcome=&#34;SUCCESS&#34;,
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>              le=&#34;+Inf&#34;,
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>              }[1d]))</span>          
-</span></span></code></pre></div><p>Again, let&rsquo;s calculate the burn rate thresholds with the chosen parameters:</p>$$
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              }[1d]))</span>
+</span></span></code></pre></div>$$
 burn\_rate\_threshold = \frac{slo\_window}{time\_window} \times budget\_consumption\_percentage = \frac{720}{24} \times 10\% = 30 \times \frac{10}{100} = 3
 $$<p>The resulting alert definition is the following:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>groups</span>:
 </span></span><span style=display:flex><span>  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>SLO Rules</span>
@@ -132,11 +132,11 @@ $$<p>The resulting alert definition is the following:</p><div class=highlight><p
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>            (1 - myservice:latency_sli:1d) / (1 - 0.9) &gt; 3
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>          and
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>            (1 - myservice:latency_sli:1h) / (1 - 0.9) &gt; 3
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          )</span>          
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          )</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>labels</span>:
 </span></span><span style=display:flex><span>          <span style=color:#f92672>severity</span>: <span style=color:#ae81ff>warning</span>
 </span></span><span style=display:flex><span>          <span style=color:#f92672>app_group</span>: <span style=color:#ae81ff>pharos</span>
-</span></span></code></pre></div><blockquote><p>[<strong>NOTE</strong>] The recorded metric <code>myservice:latency_sli:1h</code> was already defined for the <a href=#fast-burn-rate-alert>Fast burn rate alert</a>, so we can reuse that here without defining it again as a recorded rule.</p></blockquote></div></article></main><aside><div><div><h3>LATEST POSTS</h3></div><div><ul><li><a href=/posts/slo/>SLO practice with SpringBoot and Prometheus</a></li><li><a href=/posts/alerting-as-testing/>The parallelism between testing and monitoring strategies</a></li><li><a href=/posts/a-day-in-kubernetes/>A day in Kubernetes</a></li><li><a href=/posts/intro/>Why does this webiste exist?</a></li><li><a href=/posts/about/>About</a></li></ul></div></div></aside><footer><p>&copy; 2024 <a href=https://stefanoboriero.github.io/><b>Stefano</b></a>.
+</span></span></code></pre></div><blockquote><p>[<strong>NOTE</strong>] The recorded metric <code>myservice:latency_sli:1h</code> was already defined for the <a href=#fast-burn-rate-alert>Fast burn rate alert</a>, so we can reuse that here without defining it again as a recorded rule.</p></blockquote></div></article></main><aside><div><div><h3>LATEST POSTS</h3></div><div><ul><li><a href=/posts/observability/>Making software systems observable</a></li><li><a href=/posts/slo/>SLO practice with SpringBoot and Prometheus</a></li><li><a href=/posts/alerting-as-testing/>The parallelism between testing and monitoring strategies</a></li><li><a href=/posts/a-day-in-kubernetes/>A day in Kubernetes</a></li><li><a href=/posts/intro/>Why does this webiste exist?</a></li></ul></div></div></aside><footer><p>&copy; 2025 <a href=https://stefanoboriero.github.io/><b>Stefano</b></a>.
 <a href=https://github.com/StefanoBoriero><b>Github</b></a>.
 <a href=https://www.linkedin.com/in/stefanoboriero/><b>LinkedIn</b></a>.
 <a href=mailto:stefano.boriero@gmail.com><b>E-mail</b></a>.</p></footer></body></html>
