@@ -76,7 +76,7 @@ Once you add these depenency and the configuration, deploy your app and it shoul
 #### Explore the data with Prometheus and Grafana
 The metric `http.server.requests` is a [standard observation metric](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator.metrics.supported.spring-mvc) in Spring Boot apps that collects information about requests served by your application. By adding the SLO distribution configuration, this metric will have an additional label `le` (short for less than or equal) that we can use to get the number of requests that took less than the specified time to be served. You can supply only the values that you defined in your SLO distribution configuration, that's why it's important to specify them judiciously.
 
-Building on top of the example above, this query will plot the number of requests served under 200ms over a period of 28 days.
+Building on top of the example above, this query will plot the number of requests served under 200ms over a period of 30 days.
 
 ```code
 sum(
@@ -125,7 +125,7 @@ sum(
 ```
 > [**WARNING**] Notice how in the last expression we used `rate` instead of `increase`? That's because `increase` is just syntactic sugar for a `rate` multiplied by the rate period. When dividing the 2 sums, the multiplication carried out by the `increase` function can be mathematically symplified, so the result will be equivalent and more precise by using `rate` directly.
 
-> [**NOTE**] Aggregation over large windows of time require the data to be present for the whole aggregation period. This means that until you have 28 days of data available, the result of the following queries might look off. For a quicker feedback if you're headed in the right direction, you can replace 28d with a smaller time window, like 1h.
+> [**NOTE**] Aggregation over large windows of time require the data to be present for the whole aggregation period. This means that until you have 30 days of data available, the result of the following queries might look off. For a quicker feedback if you're headed in the right direction, you can replace 30d with a smaller time window, like 1h.
 
 # Alerting on SLO
 The rationale of the SLO framework is to ensure our systems provide a minum level of service. To meet those SLOs it is vital to have some alerting in place that fires when they are at risk, for us to take action and correct the failure. This is a distillation of the key takeaways from the [Google's SRE workbook alerting chapter](https://sre.google/workbook/alerting-on-slos/) on the desirable properties of alerts. When defining your alerting strategy, try to keep them in mind.
@@ -170,7 +170,7 @@ This may sound complex, but hopefully the practical example will make things cle
 ## A practical example: latency based SLO
 Let's follow on with our example
 
-> 90\% of succesful requests to the service are served in under 200ms, over a 28 day period.
+> 90\% of succesful requests to the service are served in under 200ms, over a 30 day period.
 
 Let's try defining multi-window and multi-burn-rate alert. We want to get paged when 2% of the error budget has been consumed in one hour (the [Fast burn rate alert](#fast-burn-rate-alert)) and be warned when we consumed 10\% of the error budget in one day (the [Slow burn rate alert](#slow-burn-rate-alert)).
 
@@ -254,7 +254,7 @@ groups:
           sum(rate(http_server_requests_seconds_bucket{
               service_name="myservice",
               outcome="SUCCESS",
-              le="+Inf",
+              le="0.2",
               }[1d]))
             /
           sum(rate(http_server_requests_seconds_bucket{
